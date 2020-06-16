@@ -2,7 +2,7 @@
   "name": "modulo_chat",
   "private": true,
   "dependencies": {
-    "bootstrap": "3.3.7",
+    "bootstrap": "3.4.1",
     "bootstrap-daterangepicker": "^3.0.5",
     "bootstrap-growl-ifightcrime": "^1.1.0",
     "bootstrap-progressbar": "^0.9.0",
