@@ -1,0 +1,100 @@
+<!--<p id="notice"><%= notice %></p>-->
+<% if @users %>
+  <% @users.force_encoding ("UTF-8") %>
+  <% objectArray = JSON.parse(@users) %>
+<% end %>
+
+<% if @count %>
+  <% @count.force_encoding ("UTF-8") %>
+  <% count = JSON.parse(@count) %>
+<% end %>
+
+<div class="row">  
+  <div class="col-xs-6 col-md-9" >
+    <h3>Lista de Usuários Mattermost</h3></div>
+  <div class="col-xs-6 col-md-3">
+    <h3><%= count['total_users_count'] %> usuários ativos</h3></div>
+</div>
+
+  <div class="clearfix"></div>
+      </div>
+      <div align="right">
+        <%= link_to 'Novo', new_user_path, class:'btn btn-round btn-primary'%>
+      </div>  
+        <div class="x_content" style="display: block;">      
+          <div class="table-responsive">          
+            <table class="table table-striped jambo_table bulk_action">
+              <thead>
+                <tr class="headings">
+                  <th>
+                    <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="check-all" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                  </th>
+                  <th class="column-title"></th>
+                  <th class="column-title">Username</th>
+                  <th class="column-title">Email</th>
+                  <th class="column-title">Roles</th>
+                  <th class="column-title">Locale</th>
+                  <!--<th class="column-title">Nickname</th>
+                  <th class="column-title">First name</th>
+                  <th class="column-title">Last name</th>-->
+                  <th class="column-title"></th>
+                  <th class="column-title no-link last"><span class="nobr"></span>
+                  </th>
+                  <th class="bulk-actions" colspan="7">
+                  <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                  </th>                            
+                </tr>
+              </thead>
+
+            <tbody>
+            <% objectArray.each do |user| %>
+              <tr class="even pointer">
+                <td class="a-center ">
+                  <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                </td>
+                <td class=" ">
+                  <a class="pull-left border-blue profile_thumb"><i class="fa fa-user blue"></i></a>
+                </td>
+                <td class=" "><%= user['username'] %></td>
+                <td class=" "><%= user['email'] %></td>
+                <td class=" "><%= user['roles'] %></td>
+                <td class=" "><%= user['locale'] %></td>
+                <!--<td class=" "><%= user['nickname'] %></td>
+                <td class=" "><%= user['first_name'] %></td>
+                <td class=" "><%= user['last_name'] %></td>-->
+                <td class="">
+                  <%= link_to 'Editar', edit_user_path(user['id']), class:'btn btn-round btn-success' %>                  
+                    <% if (user['id'] != "iim4f7dmsjgajqxbawsspgzeuy" ) %>
+                      
+                        <% if (user['delete_at'] == 0 ) %>
+                          <%= link_to 'Desativar', users_desativar_path(user['id']), method: :delete, data: { confirm: 'Você tem certeza disso?' }, class:'btn btn-round btn-danger' %>
+                        <% else %>
+                          <%= link_to 'Ativar', users_ativar_path(user['id']), method: :put, data: { confirm: 'Você tem certeza disso?' }, class:'btn btn-round btn-warning' %>
+                        <% end %>
+                      
+                    <% end %>
+                </td>
+                <td class="last">
+                
+                <div class="btn-group">
+                    <%= button_tag("data-toggle":'dropdown', class:'btn btn-round dropdown-toggle btn-info', type:'button', "aria-expanded":'true') do %>
+                      Gerenciar<%= content_tag :span, '', class:'caret'%>                      
+                    <% end %>                    
+                    <ul role="menu" class="dropdown-menu" aria-labelledby="dLabel">
+                      <li><%= link_to 'Visualizar', user_path(user['id']) %></li>
+                      <li class="divider"></li>
+                      <% if (user['roles'] == "system_user") %>
+                        <li><%= link_to 'Tornar Administrador', users_funcoes_path(user['id']), method: :put, data: { confirm: 'Você tem certeza disso?' } %></li>
+                      <% else %>
+                        <li><%= link_to 'Tornar Usuário', users_funcoes_path(user['id']), method: :put, data: { confirm: 'Você tem certeza disso?' } %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+    </div>  
+</div>

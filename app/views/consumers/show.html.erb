@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+<div class="well profile_view">    
+  <h4 class="brief"><i><%= @consumer.description %></i></h4>
+    </div>
+      <div class="left col-xs-7">
+        <h4><%= @consumer.author %></h4>
+          <p><strong>Informações: </strong> Desenvolvedor do App </p>
+          <p><strong>Token: </strong> <%= @consumer.token %> </p>
+          <ul class="list-unstyled">
+            <li><i class="fa fa-building"></i> Endereço: Rua Principal,  nº 101</li>
+            <li><i class="fa fa-phone"></i> Telefone: (83) 98834-2918</li>
+          </ul>
+      <%= link_to 'Edit', edit_consumer_path(@consumer), class:'btn btn-round btn-primary' %>
+      <%= link_to 'Back', consumers_path, class:"btn btn-round btn-success" %>
+      </div>        
+</div>

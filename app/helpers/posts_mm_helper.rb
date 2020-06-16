@@ -1,0 +1,2 @@
+module PostsMmHelper
+end

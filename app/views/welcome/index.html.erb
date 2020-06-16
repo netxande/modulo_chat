@@ -1,0 +1,235 @@
+<!--<h1>Welcome#index</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+<p><%= link_to 'Fazer logoff [Administrador]', destroy_admin_session_path, method: :delete %></p>-->
+<div class="bg-info clearfix" align="center">    
+    <h3>POLÍCIA MILITAR DO ESTADO DA PARAÍBA</h3>
+    <h4>BATALHÃO ESPECIALIZADO EM POLICIAMENTO COM MOTOCICLETAS</h4>
+</div>
+<br>
+
+<!-- page content -->  
+  <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Módulo CHAT: <small>Controle de mensagens de Aplicações da PMPB</small></h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>                      
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+            <div class="profile_img">
+              <div id="crop-avatar">
+                <!-- Current avatar -->
+                <%= image_tag 'pmpb.png', width:'50%', class:"img-responsive avatar-view", alt:"Avatar", title:"Polícia Militar do Estado da Paraíba" %>
+              </div>
+            </div>
+            <h3>PMPB</h3>
+            <ul class="list-unstyled user_data">
+              <li><i class="fa fa-map-marker user-profile-icon"></i> Praça Pedro Américo, João Pessoa, Paraíba
+              </li>
+              <li class="m-top-xs">
+                <i class="fa fa-external-link user-profile-icon"></i>
+                <a href="http://www.pm.pb.gov.br/portal/" target="_blank">www.pm.pb.gov.br</a>
+              </li>
+            </ul>
+            <!--<a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>-->                    
+            <!-- start skills -->
+            <h4>Dados</h4>
+            <ul class="list-unstyled user_data">
+              <li>
+                <p>Aplicações</p>
+                <div class="progress ">
+                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<%= @consumers.count*10 %>"><%= @consumers.count%></div>
+                </div>
+              </li>
+              <li>
+                <p>Usuários Ativos</p>
+                <div class="progress ">
+                  <div class="progress-bar bg-sucess" role="progressbar" data-transitiongoal="<%= (@count['total_users_count']*100)/@total %>"><%= (@count['total_users_count']*100)/@total %>%</div>
+                </div>
+              </li>
+              <% @dados.each do |dado|%>
+              <% if dado['name'] == "post_count"%>
+              <li>
+                <p>Total de Mensagens</p>
+                <div class="progress ">
+                  <div class="progress-bar progress-bar-warning" role="progressbar" data-transitiongoal="<%= dado['value'] %>"><%= dado['value'] %></div>
+                </div>
+              </li>
+              <% end %>
+              <% if dado['name'] == "channel_open_count"%>
+              <li>
+                <p>Total de Canais</p>
+                <div class="progress ">
+                  <div class="progress-bar bg-red" role="progressbar" data-transitiongoal="<%= dado['value']*5 %>"><%= dado['value'] %></div>
+                </div>
+              </li>
+              <% end %>
+              <% end %>
+
+            </ul>                      
+            <!-- end of skills -->
+          </div>                    
+          <div class="col-md-9 col-sm-9 col-xs-12 profile_center">                      
+            <div class="profile_title">
+              <div>
+                <h2>End Points de Acesso</h2>
+              </div>
+              <!--<div class="col-md-6">
+                <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
+                  <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                  <span>December 30, 2014 - January 28, 2015</span>
+                </div>
+              </div>-->
+            </div>                      
+            <!-- start of user-activity-graph -->
+            <!--<div id="graph_bar" style="width:100%; height:280px;"></div>-->
+            <!-- end of user-activity-graph -->
+            
+
+            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+              <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Usuário</a>
+                </li>
+                <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Times</a>
+                </li>
+                <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Canais</a>
+                </li>
+                <li role="presentation" class=""><a href="#tab_content4" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Mensagens</a>
+                </li>
+              </ul>
+              <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+
+                  <!-- start recent activity -->
+                  <ul class="messages">
+                  <% @usuarios.endpoints.each do |user|%>
+                    <li>                                
+                      <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+                      <div class="message_date">
+                        <h3 class="date text-info"><%= user.id %></h3>
+                        <!--<p class="month">May</p>-->
+                      </div>
+                      <div class="message_wrapper">
+                        <h4 class="heading"><%= user.titulo %></h4>
+                        <blockquote class="message"><%= user.url %><small style="color:<%= user.color %>;font-weight:bold;"><%= user.method %></small>
+                          <small><%= user.description %></small>
+                          <% if !user.payload.nil? %><code><pre><%= user.payload %></pre></code><% end %>
+                          <code><pre><%= user.response %></pre></code>
+                        </blockquote>
+                        <br />
+                        <p class="url">
+                          <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                          <!--<a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>-->
+                        </p>
+                      </div>
+                    </li>
+                  <% end %>
+                  </ul>
+                  <!-- end recent activity -->
+
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+
+                  <!-- start recent activity -->
+                  <ul class="messages">
+                   <% @times.endpoints.each do |time|%>
+                    <li>                                
+                      <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+                      <div class="message_date">
+                        <h3 class="date text-info"><%= time.id - @usuarios.endpoints.count %></h3>
+                        <!--<p class="month">May</p>-->
+                      </div>
+                      <div class="message_wrapper">
+                        <h4 class="heading"><%= time.titulo %></h4>
+                        <blockquote class="message"><%= time.url %><small style="color:<%= time.color %>;font-weight:bold"><%= time.method %></small>
+                          <small><%= time.description %></small>
+                          <% if !time.payload.nil? %><code><pre><%= time.payload %></pre></code><% end %>
+                          <code><pre><%= time.response %></pre></code>
+                        </blockquote>
+                        <br />
+                        <p class="url">
+                          <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                          <!--<a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>-->
+                        </p>
+                      </div>
+                    </li>
+                  <% end %>                    
+                  </ul>
+                  <!-- end recent activity -->
+
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                  <!-- start recent activity -->
+                  <ul class="messages">
+                    <% @canais.endpoints.each do |canal|%>
+                    <li>                                
+                      <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+                      <div class="message_date">
+                        <h3 class="date text-info"><%= canal.id - (@usuarios.endpoints.count + @times.endpoints.count) %></h3>
+                        <!--<p class="month">May</p>-->
+                      </div>
+                      <div class="message_wrapper">
+                        <h4 class="heading"><%= canal.titulo %></h4>
+                        <blockquote class="message"><%= canal.url %><small style="color:<%= canal.color %>;font-weight:bold"><%= canal.method %></small>
+                          <small><%= canal.description %></small>
+                          <% if !canal.payload.nil? %><code><pre><%= canal.payload %></pre></code><% end %>
+                          <code><pre><%= canal.response %></pre></code>
+                        </blockquote>
+                        <br />
+                        <p class="url">
+                          <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                          <!--<a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>-->
+                        </p>
+                      </div>
+                    </li>
+                  <% end %>
+                  </ul>
+                  <!-- end recent activity -->
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
+
+                  <!-- start recent activity -->
+                  <ul class="messages">
+                    <% @mensagens.endpoints.each do |post|%>
+                    <li>                                
+                      <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+                      <div class="message_date">
+                        <h3 class="date text-info"><%= post.id - (@usuarios.endpoints.count + @times.endpoints.count + @canais.endpoints.count)%></h3>
+                        <!--<p class="month">May</p>-->
+                      </div>
+                      <div class="message_wrapper">
+                        <h4 class="heading"><%= post.titulo %></h4>
+                        <blockquote class="message"><%= post.url %><small style="color:<%= post.color %>;font-weight:bold"><%= post.method %></small>
+                          <small><%= post.description %></small>
+                          <% if !post.payload.nil? %><code><pre><%= post.payload %></pre></code><% end %>
+                          <code><pre><%= post.response %></pre></code>
+                        </blockquote>
+                        <br />
+                        <p class="url">
+                          <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                          <!--<a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>-->
+                        </p>
+                      </div>
+                    </li>
+                  <% end %>
+                  </ul>
+                  <!-- end recent activity -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+<!-- /page content -->

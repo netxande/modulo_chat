@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> Modulo Chat </title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag  'application' %>
+    <%= stylesheet_link_tag  'admins' %>   
+        
+  </head>
+
+<body class="nav-md">
+    <div class="container body">
+      <div class="main_container">        
+        <div class="col-md-3 left_col menu_fixed">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <%= link_to welcome_index_path, class:'site_title' do %>
+                      <i class="fa fa-wechat"></i><span>Módulo Chat</span>
+              <% end %>
+            </div>
+            <img src="https://www.mattermost.org/wp-content/uploads/2016/03/logoHorizontal_WS.png" alt="..." class="img-circle profile_img">
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">              
+              <div class="profile_info"></div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">            
+              <div class="menu_section">                
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> Aplicações <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><%= link_to 'Lista', consumers_path %></li>                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-edit"></i> Mattermost <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><%= link_to 'Usuários', users_path %></li>
+                      <li><%= link_to 'Times', teams_index_path %></li>
+                      <li><%= link_to 'Grupos', channels_index_path %></li>
+                    </ul>
+                  </li>                  
+                </ul>
+              </div>              
+            </div>
+            <!-- /sidebar menu -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="..." alt=""><span><%= current_admin.email %></span>
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li>
+                      <%= link_to destroy_admin_session_path, method: :delete do %>
+                      <i class="fa fa-sign-out pull-right"></i>SAIR
+                      <% end %>
+                    </li>
+                  </ul>
+                </li>                
+              </ul>                
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+        
+        <!-- page content -->        
+        <div class="right_col" role="main" style="min-height: 774px;">
+          <div class="">          
+            <div class="page-title">            
+              <div class="title_center">
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            By Alexandre Ribeiro <a href="http://www.pm.pb.gov.br/portal/">PMPB</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'admins' %>
+
+    <% if notice %>
+      <script>
+        $.bootstrapGrowl('<%= notice %>', {
+          type: 'success', // (null, 'info', 'danger', 'success')
+          align: 'center', // ('left', 'right', or 'center')
+          width: 300, // (integer, or 'auto')
+          delay: 4000, // Time while the message will be displayed. It's not equivalent to the *demo* timeOut!
+          allow_dismiss: true, // If true then will display a cross to close the popup.
+          stackup_spacing: 10 // spacing between consecutively stacked growls.
+        });        
+      </script>
+    <% end %>
+
+  </body>
+</html>

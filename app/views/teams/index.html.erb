@@ -1,0 +1,57 @@
+<% if @teams %>
+  <% @teams.force_encoding ("UTF-8") %>
+  <% objectArray = JSON.parse(@teams) %>
+<% end %>
+
+  <div class="clearfix"></div>
+      </div>
+      <div class="">
+        <h3>Lista de Times Mattermost</h3>        
+      </div>  
+        <div class="x_content" style="display: block;">      
+          <div class="table-responsive">          
+            <table class="table table-striped jambo_table bulk_action">
+              <thead>
+                <tr class="headings">
+                  <th>
+                    <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="check-all" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                  </th>
+                  <th class="column-title"></th>
+                  <th class="column-title">Display_name</th>
+                  <th class="column-title">Name</th>
+                  <th class="column-title">Description</th>
+                  <th class="column-title">E-mail</th>
+                  <th class="column-title">Type</th>
+                  <th class="column-title">Company_name</th>
+                  <th class="column-title no-link last"><span class="nobr"></span>
+                  </th>
+                  <th class="bulk-actions" colspan="7">
+                  <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                  </th>                            
+                </tr>
+              </thead>
+
+            <tbody>
+            <% objectArray.each do |team| %>
+              <tr class="even pointer">
+                <td class="a-center ">
+                  <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                </td>
+                <td class=" ">
+                  <a class="pull-left border-blue profile_thumb"><i class="fa fa-group blue"></i></a>
+                </td>
+                <td class=" "><%= team['display_name'] %></td>
+                <td class=" "><%= team['name'] %></td>
+                <td class=" "><%= team['description'] %></td>
+                <td class=" "><%= team['email'] %></td>
+                <td class=" "><%= team['type'] %></td>
+                <td class=" "><%= team['company_name'] %></td>
+                <td class=" ">
+                  <%= link_to 'Visualizar membros', teams_membros_path(team['id']), class:'btn btn-round btn-success' %>
+                </td>                
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+    </div>  
+</div>

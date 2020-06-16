@@ -1,0 +1,46 @@
+<!------ Include the above in your HEAD tag ---------->
+<div class="wrapper fadeInDown" align="center">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+<div class="fadeIn first">
+  <!--<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />-->
+  <%= image_tag 'pmpb.png', id:'icon', alt:'User Icon', width:'2', heigth:'1'%>
+</div>
+
+<h2>Módulo Chat</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="fadeIn second">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="fadeIn third">
+    <%= f.label "Senha" %><br />
+    <%= f.password_field :password, autocomplete: "current-password" %>
+  </div>
+
+  <!--<% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>-->
+  <p></p>
+  <div class="fadeIn fourth">
+    <%= f.submit "Entrar" %>
+  </div>
+<% end %>
+
+<%= render "admins/shared/links" %>
+
+<!-- Remind Passowrd -->
+  <div id="formFooter">
+  <!--<a class="underlineHover" href="#">Forgot Password?</a>-->
+    <p>By Alexandre Ribeiro do Nascimento</p>
+  </div>
+
+  </div>
+</div>

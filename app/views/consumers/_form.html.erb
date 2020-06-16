@@ -1,0 +1,41 @@
+<div class="clearfix"></div>  
+</div>
+<div class="x_content">
+<br>
+<%= form_with(model: consumer, local: true) do |form| %>
+  <% if consumer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(consumer.errors.count, "error") %> prohibited this consumer from being saved:</h2>
+
+      <ul>
+      <% consumer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label "Descrição" %>
+    <%= form.text_field :description, class: "form-control", class: "form-control has-feedback-left" %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Autor" %>
+    <%= form.text_field :author, class: "form-control", class: "form-control has-feedback-left" %>
+  </div> 
+
+  <!--<div class="field">
+    <%= form.label :token %>
+    <%= form.text_field :token %>
+  </div>-->
+  <br>
+  <br>
+  <div class="actions" align="center">
+    <%= form.submit "Salvar Informações", class:"btn btn-success"%>
+  </div>
+<% end %>
+  
+
+              
+                

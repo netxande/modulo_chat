@@ -1,0 +1,65 @@
+<% if @msgs %>
+  <% @msgs.force_encoding ("UTF-8") %>
+  <% objectArray = JSON.parse(@msgs) %>
+<% end %>
+
+<% if @users %>
+  <% @users.force_encoding ("UTF-8") %>
+  <% usuarios = JSON.parse(@users) %>
+<% end %>
+
+  <div class="clearfix"></div>
+      </div>
+      <div class="">
+        <h3>Membros do Grupo Mattermost</h3>        
+      </div>  
+        <div class="x_content" style="display: block;">      
+          <div class="table-responsive">          
+            <table class="table table-striped jambo_table bulk_action">
+              <thead>
+                <tr class="headings">
+                  <th>
+                    <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="check-all" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                  </th>
+                  <th class="column-title"></th>
+                  <th class="column-title">Username</th>
+                  <th class="column-title">Channel_Id</th>
+                  <th class="column-title">Mensagem</th>
+                  <th class="column-title">Type</th>                  
+                  <th class="column-title no-link last"><span class="nobr"></span>
+                  </th>
+                  <th class="bulk-actions" colspan="7">
+                  <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                  </th>                            
+                </tr>
+              </thead>
+
+            <tbody>            
+            <% objectArray['order'].each do |msg| %>
+              <tr class="even pointer">
+                <td class="a-center ">
+                  <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                </td>
+                <td class=" ">
+                  <a class="pull-left border-blue profile_thumb"><i class="fa fa-envelope blue"></i></a>
+                </td>
+                <% cont = 1 %>
+                <% usuarios.each do |user| %>
+                  <% if objectArray['posts'][msg]['user_id'] == user['id'] && cont == 1 %>
+                    <td class=" "><%= user['username'] %></td>
+                    <% cont+= 1 %>
+                  <% end %>
+                <% end %>
+                <td class=" "><%= objectArray['posts'][msg]['channel_id'] %></td>
+                <td class=" "><%= objectArray['posts'][msg]['message'] %></td>
+                <td class=" "><%= objectArray['posts'][msg]['type'] %></td>                
+                <td class=" "></td>
+              </tr>              
+              <% end %>
+            </tbody>
+          </table>
+    </div>  
+</div>
+<div class="" align="right">
+  <%= link_to 'Voltar', channels_index_path, class:"btn btn-success" %>
+</div>

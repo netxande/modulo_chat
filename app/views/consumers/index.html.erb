@@ -1,0 +1,50 @@
+<h3>Lista de Aplicações Cadastradas</h3>
+  <div class="clearfix"></div>
+      </div>
+      <div align="right">
+        <%= link_to 'Novo', new_consumer_path, class:'btn btn-round btn-primary'%>
+      </div>  
+        <div class="x_content" style="display: block;">      
+          <div class="table-responsive">          
+            <table class="table table-striped jambo_table bulk_action">
+              <thead>
+                <tr class="headings">
+                  <th>
+                    <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="check-all" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                  </th>
+                  <th class="column-title">id</th>
+                  <th class="column-title">Descrição</th>
+                  <th class="column-title">Autor </th>
+                  <th class="column-title">Token </th>
+                  <th class="column-title"></th>
+                  <th class="column-title no-link last"><span class="nobr"></span>
+                  </th>
+                  <th class="bulk-actions" colspan="7">
+                  <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                  </th>                            
+                </tr>
+              </thead>
+
+            <tbody>
+            <% @consumers.each do |consumer| %>
+              <tr class="even pointer">
+                <td class="a-center ">
+                  <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                </td>
+                <td class=" "><%= consumer.id %></td>
+                <td class=" "><%= consumer.description %></td>
+                <td class=" "><%= consumer.author %></td>
+                <td class=" "><%= consumer.token %></td>
+                <td class="">
+                  <%= link_to 'Editar', edit_consumer_path(consumer), class:'btn btn-round btn-success' %>
+                  <%= link_to 'Apagar', consumer, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-round btn-danger' %>
+                  <%= link_to 'Gerar Token', consumers_token_path(consumer), class:'btn btn-round btn-warning', method: :patch %>
+                </td>
+                <td class="last"><%= link_to 'Visualizar', consumer, class:'btn btn-info' %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+  </div>  
+</div>
